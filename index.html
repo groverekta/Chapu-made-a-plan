@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Psst… Anmol 🤭</title>
+<meta name="description" content="Your Chapu has something planned for you." />
+<meta property="og:title" content="Psst… Anmol 🤭" />
+<meta property="og:description" content="Your Chapu has something planned for you. Open it, Motuu." />
+<meta name="theme-color" content="#FFF4DA" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23FBE38E' stroke='%233B2416' stroke-width='4'/%3E%3Cpath d='M32 48C20 39 15 33 15 26a8 8 0 0 1 17-4 8 8 0 0 1 17 4c0 7-5 13-17 22z' fill='%23E2405B'/%3E%3C/svg%3E" />
+
+<!-- Fonts (optional: the page falls back to system fonts if these can't load) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..900,0..100,0..1&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" />
+
+<style>
+/* =========================================================
+   EASY EDITS: colours live here. Change a hex code and the
+   whole site updates.
+   ========================================================= */
+:root{
+  --bar:#FFF7E6;
+  --butter:#FBE38E;
+  --butter-deep:#F6CE5A;
+  --cream:#FFF7E6;
+  --cream-2:#FFEFD0;
+  --cherry:#E2405B;
+  --cherry-soft:#F7A6B8;
+  --powder:#A9CBEA;
+  --lavender:#C9B8EC;
+  --ink:#3B2416;          /* chocolate brown: text + outlines */
+  --ink-soft:#5A3B29;
+  --night-ink:#1B1638;
+
+  --display:"Fraunces", "Iowan Old Style", "Georgia", serif;
+  --body:"Nunito", ui-rounded, "SF Pro Rounded", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --hand:"Caveat", "Bradley Hand", "Segoe Print", cursive;
+
+  --ease-out:cubic-bezier(.2,.8,.2,1);
+  --ease-pop:cubic-bezier(.3,1.6,.5,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:var(--body);
+  color:var(--ink);
+  background:var(--cream);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+}
+button{font:inherit;color:inherit}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------------- SKY (one layer per scene, cross-faded) ---------------- */
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none}
+.sky i{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease}
+.sky .s1{background:radial-gradient(120% 70% at 80% 0%,#FFF1BF 0%,rgba(255,241,191,0) 60%),linear-gradient(180deg,#FFF7E6 0%,#FFF1CF 55%,#FDE3A0 100%)}
+.sky .s2{background:radial-gradient(90% 60% at 20% 0%,#D9EAF8 0%,rgba(217,234,248,0) 70%),linear-gradient(180deg,#CFE3F5 0%,#FFF2D2 55%,#FFE39A 100%)}
+.sky .s3{background:linear-gradient(180deg,#A9CBEA 0%,#D6C8F0 40%,#FFD8C6 75%,#FFE7B0 100%)}
+.sky .s4{background:linear-gradient(180deg,#8F87CA 0%,#BDAEE6 42%,#EBD3EA 80%,#F7E1DC 100%)}
+.sky .s5{background:radial-gradient(80% 50% at 50% 100%,rgba(247,166,184,.35) 0%,rgba(247,166,184,0) 70%),linear-gradient(180deg,#191540 0%,#2F2A6A 40%,#5D4F9C 78%,#9C83C6 100%)}
+body[data-scene="1"] .sky .s1,body[data-scene="2"] .sky .s2,body[data-scene="3"] .sky .s3,
+body[data-scene="4"] .sky .s4,body[data-scene="5"] .sky .s5{opacity:1}
+
+/* drifting background clouds */
+.bg-cloud{position:absolute;left:0;width:var(--w,120px);height:auto;opacity:.6;animation:drift var(--t,70s) linear infinite;animation-delay:var(--dl,0s);transition:opacity 1.2s}
+.bg-cloud use{fill:#fff;stroke:var(--ink);stroke-width:2.4}
+body[data-scene="4"] .bg-cloud{opacity:.55}
+body[data-scene="5"] .bg-cloud{opacity:.18}
+@keyframes drift{from{transform:translateX(-35vw)}to{transform:translateX(115vw)}}
+
+/* stars */
+.stars{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease}
+body[data-scene="3"] .stars{opacity:.35}
+body[data-scene="4"] .stars{opacity:.75}
+body[data-scene="5"] .stars{opacity:1}
+.star{position:absolute;width:var(--s);height:var(--s);border-radius:50%;background:#FFF7E6;animation:twinkle var(--t) ease-in-out infinite;animation-delay:var(--d)}
+.star.sparkle{background:none;width:calc(var(--s)*4);height:calc(var(--s)*4)}
+.star.sparkle svg{width:100%;height:100%;display:block}
+@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.7)}50%{opacity:1;transform:scale(1)}}
+.moon{position:absolute;top:13%;right:9%;width:56px;height:56px;border-radius:50%;
+  box-shadow:inset -14px 6px 0 0 #FFF1C2;opacity:0;transform:translateY(30px) rotate(-15deg);transition:opacity 1.6s ease,transform 1.6s var(--ease-out)}
+body[data-scene="4"] .moon{opacity:.55;transform:none}
+body[data-scene="5"] .moon{opacity:1;transform:none;filter:drop-shadow(0 0 18px rgba(255,241,194,.6))}
+.shooting{position:absolute;top:12%;right:-10%;width:120px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,#FFF7E6,rgba(255,247,230,0));opacity:0}
+body[data-scene="5"] .shooting{animation:shoot 9s ease-in 2s infinite}
+@keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(-25deg)}4%{opacity:1}18%{opacity:0;transform:translate(-70vw,32vh) rotate(-25deg)}100%{opacity:0;transform:translate(-70vw,32vh) rotate(-25deg)}}
+
+/* paper-grain texture for an art-directed print feel */
+.grain{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.07;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+body[data-scene="5"] .grain{mix-blend-mode:screen;opacity:.05}
+
+/* ---------------- TOP BAR ---------------- */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:20;background:linear-gradient(180deg,var(--bar) 62%,rgba(0,0,0,0));transition:background .6s;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:calc(env(safe-area-inset-top) + 12px) 16px 10px}
+.brand{display:flex;flex-direction:column;line-height:1;transition:color 1s}
+.brand b{font-family:var(--display);font-weight:900;font-size:.95rem;letter-spacing:.02em;font-variation-settings:"SOFT" 100,"WONK" 1}
+.brand span{font-family:var(--hand);font-size:1.05rem;color:var(--cherry);margin-top:2px}
+body[data-scene="2"]{--bar:#CFE3F5}body[data-scene="3"]{--bar:#A9CBEA}body[data-scene="4"]{--bar:#8F87CA}body[data-scene="5"]{--bar:#191540}
+body[data-scene="5"] .brand{color:var(--cream)}
+body[data-scene="5"] .brand span{color:var(--cherry-soft)}
+
+.progress{position:relative;width:118px;height:30px;flex:none}
+.progress .track{position:absolute;left:6px;right:6px;top:19px;border-top:2.5px dashed currentColor;opacity:.35}
+.progress ol{list-style:none;position:absolute;inset:0}
+.progress li{position:absolute;top:14px;width:12px;height:12px;margin-left:-6px;border-radius:50%;border:2.5px solid var(--ink);background:var(--cream);transition:background .4s,transform .4s var(--ease-pop)}
+.progress li:nth-child(1){left:6px}.progress li:nth-child(2){left:28%}
+.progress li:nth-child(3){left:50%}.progress li:nth-child(4){left:72%}.progress li:nth-child(5){left:calc(100% - 6px)}
+.progress li.done{background:var(--ink)}
+.progress li.now{background:var(--cherry);transform:scale(1.25)}
+.progress .scooter{position:absolute;top:-4px;width:22px;height:18px;margin-left:-11px;transition:left .9s var(--ease-out)}
+.progress .scooter svg{display:block;width:100%;height:100%;animation:putt .5s ease-in-out infinite alternate}
+@keyframes putt{to{transform:translateY(-1.5px) rotate(-3deg)}}
+body[data-scene="5"] .progress{color:var(--cream)}
+body[data-scene="5"] .progress li{border-color:var(--cream);background:transparent}
+body[data-scene="5"] .progress li.done{background:var(--cream)}
+body[data-scene="5"] .progress li.now{background:var(--cherry)}
+
+.sound{flex:none;width:44px;height:44px;border-radius:50%;border:2.5px solid var(--ink);background:var(--cream);display:grid;place-items:center;cursor:pointer;
+  box-shadow:0 3px 0 var(--ink);transition:transform .12s,box-shadow .12s,background .3s}
+.sound:hover{transform:translateY(-1px);box-shadow:0 4px 0 var(--ink)}
+.sound:active{transform:translateY(3px);box-shadow:0 0 0 var(--ink)}
+.sound[aria-pressed="true"]{background:var(--butter)}
+.sound svg{width:22px;height:22px}
+.sound .slash{transition:opacity .2s}
+.sound[aria-pressed="true"] .slash{opacity:0}
+.sound .wave{opacity:0;transition:opacity .2s}
+.sound[aria-pressed="true"] .wave{opacity:1}
+.right{display:flex;align-items:center;gap:12px}
+
+/* ---------------- SCENES ---------------- */
+.stage{position:fixed;inset:0;z-index:5}
+.scene{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
+  opacity:0;visibility:hidden;pointer-events:none;transition:opacity .6s ease,transform .6s var(--ease-out),filter .6s ease,visibility 0s linear .6s}
+.scene.is-active{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .6s ease,visibility 0s}
+.scene.is-leaving{visibility:visible;opacity:0;transform:translateY(-28px) scale(.97);filter:blur(5px);transition:opacity .5s ease,transform .55s var(--ease-out),filter .5s ease}
+.inner{position:relative;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:calc(env(safe-area-inset-top) + 84px) 22px calc(env(safe-area-inset-bottom) + 40px);max-width:560px;margin:0 auto;gap:18px}
+
+.rise{opacity:0;transform:translateY(22px)}
+.scene.is-active .rise{animation:rise .85s var(--ease-out) forwards;animation-delay:calc(var(--d,0) * 1ms + 200ms)}
+@keyframes rise{to{opacity:1;transform:none}}
+
+.eyebrow{font-family:var(--hand);font-weight:700;font-size:1.7rem;color:var(--cherry);transform:rotate(-2deg);line-height:1}
+.display{font-family:var(--display);font-weight:900;font-variation-settings:"SOFT" 100,"WONK" 1,"opsz" 144;letter-spacing:-.02em;line-height:.95;color:var(--ink)}
+h1.display{font-size:clamp(2.6rem,11.5vw,5rem)}
+h2.display{font-size:clamp(2.2rem,9.5vw,4rem)}
+h1:focus,h2:focus{outline:none}
+.lede{font-size:clamp(1.06rem,4.3vw,1.22rem);line-height:1.6;color:var(--ink-soft);font-weight:600;max-width:30ch}
+.hand{font-family:var(--hand);font-weight:700}
+
+/* letter-by-letter headline */
+.word{display:inline-block;white-space:nowrap}
+.ch{display:inline-block;opacity:0}
+.scene.is-active .ch{animation:popIn .55s var(--ease-pop) forwards,wave 3.2s ease-in-out infinite;
+  animation-delay:calc(350ms + var(--i) * 45ms),calc(2200ms + var(--i) * 90ms)}
+@keyframes popIn{0%{opacity:0;transform:translateY(.5em) scale(.5) rotate(-12deg)}100%{opacity:1;transform:none}}
+@keyframes wave{0%,70%,100%{transform:none}80%{transform:translateY(-.1em) rotate(-4deg)}}
+
+/* ---------------- BUTTONS ---------------- */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:58px;padding:16px 28px;
+  font-family:var(--body);font-weight:900;font-size:1.08rem;letter-spacing:.01em;color:var(--ink);background:var(--butter);
+  border:2.5px solid var(--ink);border-radius:999px;box-shadow:0 5px 0 var(--ink);cursor:pointer;
+  transition:transform .12s ease,box-shadow .12s ease,background .25s ease;touch-action:manipulation;user-select:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--ink);background:#FDEAA6}
+.btn:active{transform:translateY(5px);box-shadow:0 0 0 var(--ink)}
+.btn .arr{display:inline-block;transition:transform .25s var(--ease-pop)}
+.btn:hover .arr{transform:translateX(5px)}
+.btn--cherry{background:var(--cherry);color:var(--cream)}
+.btn--cherry:hover{background:#EA5670}
+.btn--ghost{background:var(--cream)}
+.btn:focus-visible,.sound:focus-visible,.tap:focus-visible{outline:3px solid var(--cherry);outline-offset:4px}
+.night .btn{box-shadow:0 5px 0 var(--night-ink);border-color:var(--night-ink)}
+.night .btn:hover{box-shadow:0 7px 0 var(--night-ink)}
+.night .btn:active{box-shadow:0 0 0 var(--night-ink)}
+.btn-wrap{padding-top:8px}
+
+/* framed illustration card */
+.frame{width:100%;max-width:420px;border:2.5px solid var(--ink);border-radius:30px;overflow:hidden;box-shadow:6px 6px 0 var(--ink);background:var(--cream);transform:rotate(-1.2deg)}
+.frame svg{display:block;width:100%;height:auto}
+.art-stroke{stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* SVG motion helpers */
+.bob{animation:bob 3.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.bob.b2{animation-duration:4.2s;animation-delay:-1.3s}
+.bob.b3{animation-duration:3.1s;animation-delay:-.6s}
+@keyframes bob{from{transform:translateY(-4px) rotate(-3deg)}to{transform:translateY(5px) rotate(3deg)}}
+.tw{animation:twinkle 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.tw.t2{animation-delay:-.9s}.tw.t3{animation-delay:-1.7s}
+.glow{animation:glowp 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.glow.g2{animation-delay:-.7s}.glow.g3{animation-delay:-1.4s}.glow.g4{animation-delay:-2.1s}
+@keyframes glowp{0%,100%{opacity:.6;transform:scale(.92)}50%{opacity:1;transform:scale(1.06)}}
+.firefly{animation:fly 6s ease-in-out infinite alternate;transform-box:fill-box}
+.firefly.f2{animation-duration:7.5s;animation-delay:-2s}.firefly.f3{animation-duration:5.2s;animation-delay:-3.5s}
+@keyframes fly{0%{transform:translate(0,0);opacity:.3}50%{opacity:1}100%{transform:translate(14px,-12px);opacity:.4}}
+
+/* ---------------- SCENE 1 ---------------- */
+.env-btn{background:none;border:0;cursor:pointer;width:min(62vw,250px);animation:dropIn 1.5s var(--ease-out) both;border-radius:24px}
+.env-btn svg{display:block;width:100%;height:auto;overflow:visible}
+.scene.is-active .env-btn{animation:dropIn 1.5s var(--ease-out) both}
+@keyframes dropIn{0%{transform:translateY(-110vh) rotate(-10deg)}62%{transform:translateY(14px) rotate(4deg)}82%{transform:translateY(-6px) rotate(-1deg)}100%{transform:none}}
+.env-sway{transform-origin:120px 26px;animation:sway 4.4s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-3.5deg)}50%{transform:rotate(3.5deg)}}
+.env-btn.wiggle .env-sway{animation:wiggle .5s ease}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
+.flap-closed{transform-box:fill-box;transform-origin:50% 0;transition:transform .32s ease-in}
+.flap-open{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(0);transition:transform .32s ease-out .3s}
+.letter{opacity:0;transform:translateY(30px);transition:transform .7s cubic-bezier(.2,.9,.3,1.35) .5s,opacity .2s ease .45s}
+.env-btn.open .flap-closed{transform:scaleY(0)}
+.env-btn.open .flap-open{transform:scaleY(1)}
+.env-btn.open .letter{opacity:1;transform:translateY(-48px)}
+.psst{font-family:var(--hand);font-size:2rem;font-weight:700;color:var(--cherry);transform:rotate(-3deg)}
+.doodle{position:absolute;pointer-events:none}
+.doodle svg{display:block;width:100%;height:100%}
+
+/* ---------------- SPLIT LAYOUT (2–4) ---------------- */
+.tag{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border:2px solid var(--ink);border-radius:999px;background:var(--cream);
+  font-weight:800;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;box-shadow:3px 3px 0 var(--ink);transform:rotate(1.5deg)}
+.tag .dot{width:8px;height:8px;border-radius:50%;background:var(--cherry);animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+
+/* ---------------- SCENE 3 ---------------- */
+.stack{display:flex;flex-direction:column;align-items:center;gap:.08em;font-size:clamp(1.8rem,7.6vw,3.6rem) !important}
+.hl{display:block;width:fit-content;white-space:nowrap;padding:0 .12em;background-image:linear-gradient(var(--c),var(--c));background-repeat:no-repeat;background-position:0 88%;background-size:0% 40%}
+.scene.is-active .hl{animation:marker .65s var(--ease-out) forwards;animation-delay:calc(var(--d) * 1ms)}
+@keyframes marker{to{background-size:100% 40%}}
+.promises{list-style:none;display:grid;gap:12px;width:100%;max-width:420px;text-align:left}
+.promise{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--cream);border:2.5px solid var(--ink);border-radius:22px;box-shadow:4px 4px 0 var(--ink);
+  font-weight:800;font-size:1.04rem;line-height:1.3;cursor:pointer;transition:transform .2s var(--ease-pop)}
+.promise:nth-child(1){transform:rotate(-1.2deg)}.promise:nth-child(2){transform:rotate(.9deg)}.promise:nth-child(3){transform:rotate(-.6deg)}
+.promise.wig{animation:wiggle .45s ease}
+.promise .ico{flex:none;width:46px;height:46px;border-radius:14px;border:2px solid var(--ink);display:grid;place-items:center}
+.promise .ico svg{width:30px;height:30px}
+.promise small{display:block;font-family:var(--hand);font-size:1.25rem;font-weight:700;color:var(--cherry);margin-top:2px}
+.promise .num{font-family:var(--display);font-weight:900;font-size:.78rem;letter-spacing:.08em;color:var(--ink-soft);display:block;margin-bottom:2px}
+.note{font-family:var(--hand);font-size:1.45rem;font-weight:700;color:var(--ink-soft);transform:rotate(-1.5deg);line-height:1.15}
+
+/* ---------------- SCENE 4 ---------------- */
+.card{background:var(--cream);border:2.5px solid var(--ink);border-radius:26px;box-shadow:6px 6px 0 var(--ink);padding:22px 22px 20px;text-align:left;max-width:440px;width:100%}
+.card p{font-size:1.08rem;line-height:1.7;font-weight:600;color:var(--ink-soft)}
+.card p + p{margin-top:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:420px}
+.chip{font-family:var(--hand);font-size:1.3rem;font-weight:700;padding:3px 14px;border-radius:999px;border:2px solid var(--ink);background:var(--c,#fff)}
+.zz{animation:zz 3s ease-in-out infinite;opacity:0;transform-box:fill-box}
+.zz.z2{animation-delay:1s}.zz.z3{animation-delay:2s}
+@keyframes zz{0%{opacity:0;transform:translate(0,6px)}30%{opacity:1}100%{opacity:0;transform:translate(10px,-20px)}}
+.tvglow{animation:tv 2.2s steps(5) infinite}
+@keyframes tv{0%,100%{opacity:.55}40%{opacity:.8}70%{opacity:.45}}
+
+/* ---------------- SCENE 5 ---------------- */
+.night{color:var(--cream)}
+.night .display{color:var(--cream)}
+.night .eyebrow{color:var(--butter)}
+.cake-btn{background:none;border:0;cursor:pointer;width:min(64vw,250px);border-radius:24px;transition:transform .2s var(--ease-pop)}
+.cake-btn:hover{transform:scale(1.03) rotate(-1deg)}
+.cake-btn svg{display:block;width:100%;height:auto;overflow:visible}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flicker .9s ease-in-out infinite alternate;transition:transform .35s ease,opacity .35s ease}
+@keyframes flicker{0%{transform:scale(1,1) rotate(-3deg)}100%{transform:scale(.9,1.1) rotate(3deg)}}
+.cake-glow{transition:opacity .6s ease}
+.smoke{opacity:0;stroke-dasharray:60;stroke-dashoffset:60}
+.blown .flame{animation:none;transform:scale(0,0);opacity:0}
+.blown .cake-glow{opacity:0}
+.blown .smoke{animation:smoke 2.2s ease-out .2s forwards}
+@keyframes smoke{0%{opacity:0;stroke-dashoffset:60}20%{opacity:.9}100%{opacity:0;stroke-dashoffset:0;transform:translateY(-16px)}}
+.wish-hint{font-family:var(--hand);font-size:1.5rem;font-weight:700;color:var(--butter)}
+.blown .wish-hint,.blown .blow-wrap{display:none}
+.letter-card{display:none;background:rgba(255,247,230,.96);color:var(--ink);border:2.5px solid var(--night-ink);border-radius:28px;box-shadow:6px 6px 0 var(--night-ink);
+  padding:26px 22px 24px;text-align:left;max-width:460px;width:100%}
+.blown .letter-card{display:block}
+.letter-card p{font-size:1.08rem;line-height:1.7;font-weight:600;color:var(--ink-soft);opacity:0;transform:translateY(14px);filter:blur(4px);
+  transition:opacity .9s ease,transform .9s var(--ease-out),filter .9s ease}
+.letter-card p.first{font-family:var(--display);font-weight:800;font-size:1.4rem;color:var(--ink);font-variation-settings:"SOFT" 100}
+.letter-card p + p{margin-top:14px}
+.letter-card p.show{opacity:1;transform:none;filter:none}
+.letter-card .love{font-family:var(--display);font-weight:900;color:var(--cherry);font-size:1.3rem}
+.sig{display:block;margin-top:18px;font-family:var(--hand);font-weight:700;font-size:2.3rem;color:var(--cherry);text-align:right;transform:rotate(-3deg);
+  clip-path:inset(0 100% 0 0);transition:clip-path 1.6s ease}
+.sig.show{clip-path:inset(0 0 0 0)}
+.replay-wrap{opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .8s ease,transform .8s var(--ease-out)}
+.replay-wrap.show{opacity:1;transform:none;pointer-events:auto}
+
+/* ---------------- FX LAYER (bursts + confetti) ---------------- */
+.fx{position:fixed;inset:0;z-index:40;pointer-events:none;overflow:hidden}
+.spark{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px}
+.spark svg{display:block;width:100%;height:100%}
+.spark.dot{border-radius:50%;background:currentColor;width:9px;height:9px;margin:-4px 0 0 -4px}
+.confetti{position:absolute;top:-20px;width:9px;height:14px;border-radius:3px}
+
+/* ---------------- DESKTOP ---------------- */
+@media (min-width:900px){
+  .topbar{padding:22px 34px}
+  .brand b{font-size:1.1rem}
+  .progress{width:180px}
+  .inner.split{max-width:1120px;display:grid;grid-template-columns:1.05fr 1fr;align-content:center;column-gap:72px;row-gap:18px;text-align:left;justify-items:start}
+  .inner.split > .art-col{grid-column:1;grid-row:1 / span 8;justify-self:center;width:100%;display:flex;flex-direction:column;align-items:center;gap:24px}
+  .inner.split > :not(.art-col){grid-column:2}
+  .inner.split .stack{align-items:flex-start}
+  .inner.split .chips{justify-content:flex-start}
+  .frame{max-width:500px}
+  .lede{max-width:34ch}
+  .env-btn{width:280px}
+  .cake-btn{width:270px}
+}
+@media (max-height:680px) and (max-width:899px){
+  .inner{gap:14px;padding-top:calc(env(safe-area-inset-top) + 76px)}
+  .frame{max-width:330px}
+  .env-btn{width:min(48vw,200px)}
+  .cake-btn{width:min(50vw,210px)}
+}
+
+/* ---------------- REDUCED MOTION ---------------- */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;animation-delay:0ms !important;transition-duration:.001ms !important;transition-delay:0ms !important}
+  .bg-cloud,.shooting{display:none}
+}
+</style>
+</head>
+
+<body data-scene="1">
+
+<!-- Shared SVG shapes -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="cloud" viewBox="0 0 100 50"><path d="M22 46C8 46 4 31 16 26C13 13 29 6 38 14C42 2 63 0 68 14C78 7 93 16 88 28C99 30 98 46 86 46Z"/></symbol>
+    <symbol id="spark" viewBox="-10 -10 20 20"><path d="M0-9C1-2 2-1 9 0C2 1 1 2 0 9C-1 2-2 1-9 0C-2-1-1-2 0-9Z"/></symbol>
+    <symbol id="heart" viewBox="0 0 24 22"><path d="M12 21C5 15 1 11 1 6.5A5.5 5.5 0 0 1 12 4a5.5 5.5 0 0 1 11 2.5C23 11 19 15 12 21Z"/></symbol>
+  </defs>
+</svg>
+
+<!-- Background world -->
+<div class="sky" aria-hidden="true">
+  <i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i><i class="s5"></i>
+  <div class="stars" id="stars"></div>
+  <div class="moon"></div>
+  <div class="shooting"></div>
+  <svg class="bg-cloud" style="top:16%;--w:130px;--t:80s;--dl:-20s" viewBox="0 0 100 50"><use href="#cloud"/></svg>
+  <svg class="bg-cloud" style="top:30%;--w:90px;--t:95s;--dl:-60s" viewBox="0 0 100 50"><use href="#cloud"/></svg>
+  <svg class="bg-cloud" style="top:84%;--w:110px;--t:110s;--dl:-35s" viewBox="0 0 100 50"><use href="#cloud"/></svg>
+  <svg class="bg-cloud" style="top:8%;--w:70px;--t:70s;--dl:-50s" viewBox="0 0 100 50"><use href="#cloud"/></svg>
+</div>
+
+<!-- Top bar -->
+<header class="topbar">
+  <div class="brand" aria-label="Anmol's Day Off, a date with Chapu">
+    <b>ANMOL'S DAY OFF</b>
+    <span>a date with Chapu</span>
+  </div>
+  <div class="right">
+    <nav class="progress" aria-label="Where we are in the story">
+      <div class="track"></div>
+      <ol>
+        <li title="the message"></li><li title="the reveal"></li><li title="the plan"></li><li title="the soft bit"></li><li title="the birthday"></li>
+      </ol>
+      <span class="scooter" id="scooter" aria-hidden="true">
+        <svg viewBox="0 0 44 36"><g class="art-stroke" stroke-width="3">
+          <path d="M8 22h22c4 0 6-4 6-8l-4-8h-6" fill="none"/>
+          <path d="M6 22c0-5 4-8 9-8h11l2 8z" fill="#E2405B"/>
+          <circle cx="10" cy="27" r="5" fill="#FFF7E6"/><circle cx="34" cy="27" r="5" fill="#FFF7E6"/>
+          <path d="M24 6h6" fill="none"/>
+        </g></svg>
+      </span>
+      <span class="sr-only" id="progressText" aria-live="polite">Part 1 of 5</span>
+    </nav>
+    <button class="sound" id="sound" type="button" aria-pressed="false" aria-label="Play soft background music">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#3B2416" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 9h4l5-4v14l-5-4H4z" fill="#FFF7E6"/>
+        <path class="wave" d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/>
+        <path class="slash" d="M16 9l5 6M21 9l-5 6"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main class="stage" id="stage">
+
+  <!-- ================= SCENE 1: THE UNEXPECTED MESSAGE ================= -->
+  <section class="scene is-active" id="scene1" aria-labelledby="h1">
+    <div class="doodle" style="top:18%;left:8%;width:26px;height:26px" aria-hidden="true"><svg viewBox="-10 -10 20 20" class="tw"><use href="#spark" fill="#E2405B"/></svg></div>
+    <div class="doodle" style="top:30%;right:9%;width:18px;height:18px" aria-hidden="true"><svg viewBox="-10 -10 20 20" class="tw t2"><use href="#spark" fill="#A9CBEA" stroke="#3B2416" stroke-width="1.5"/></svg></div>
+    <div class="doodle" style="bottom:14%;left:10%;width:40px;height:40px" aria-hidden="true">
+      <svg viewBox="0 0 40 40" class="bob"><path d="M20 6C27 6 30 12 30 18C30 26 22 31 14 30" fill="none" class="art-stroke"/><circle cx="12" cy="31" r="5" fill="#E2405B" class="art-stroke"/><circle cx="24" cy="34" r="5" fill="#E2405B" class="art-stroke"/><path d="M20 6Q24 2 28 4" fill="none" class="art-stroke"/></svg>
+    </div>
+    <div class="doodle" style="bottom:20%;right:8%;width:46px;height:30px" aria-hidden="true">
+      <svg viewBox="0 0 46 30" class="bob b2"><path d="M3 20c6-14 12 6 18-6s12 6 22-8" fill="none" stroke="#C9B8EC" stroke-width="4" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="inner">
+      <button class="env-btn" id="envelope" type="button" aria-label="A little envelope for Motuu. Tap it.">
+        <svg viewBox="0 0 240 220" aria-hidden="true">
+          <g class="env-sway">
+            <use href="#cloud" x="68" y="2" width="104" height="52" fill="#fff" stroke="#3B2416" stroke-width="2.4"/>
+            <path d="M120 50Q124 72 120 98" fill="none" class="art-stroke" stroke-width="2"/>
+            <g transform="translate(40 96)">
+              <rect x="0" y="0" width="160" height="108" rx="10" fill="#FFEFD0" class="art-stroke"/>
+              <path class="flap-open" d="M6 0H154L80-56Z" fill="#F6CE5A" stroke="#3B2416" stroke-width="2.5" stroke-linejoin="round"/>
+              <g class="letter">
+                <rect x="16" y="8" width="128" height="70" rx="6" fill="#fff" class="art-stroke"/>
+                <text x="80" y="34" text-anchor="middle" font-family="Caveat, cursive" font-weight="700" font-size="20" fill="#E2405B">it's a date ♡</text>
+                <path d="M34 50H126M34 62H110" stroke="#C9B8EC" stroke-width="3" stroke-linecap="round"/>
+              </g>
+              <path d="M2 34L80 78L158 34V100Q158 108 150 108H10Q2 108 2 100Z" fill="#FFF7E6" class="art-stroke"/>
+              <text x="14" y="98" font-family="Caveat, cursive" font-weight="700" font-size="18" fill="#3B2416">to: Motuu ♡</text>
+              <rect x="122" y="76" width="26" height="24" rx="3" fill="#A9CBEA" stroke="#3B2416" stroke-width="2" stroke-dasharray="3 2"/>
+              <circle cx="135" cy="88" r="5" fill="#FBE38E" stroke="#3B2416" stroke-width="1.6"/>
+              <path class="flap-closed" d="M4 2Q80-2 156 2L84 60Q80 63 76 60Z" fill="#FBE38E" stroke="#3B2416" stroke-width="2.5" stroke-linejoin="round"/>
+              <circle cx="80" cy="2" r="4" fill="#E2405B" stroke="#3B2416" stroke-width="2"/>
+            </g>
+          </g>
+        </svg>
+      </button>
+
+      <p class="psst rise" style="--d:500">Psst… Anmol.</p>
+      <h1 class="display letters" id="h1" tabindex="-1">MOTUUUU, OPEN THIS!</h1>
+      <p class="lede rise" style="--d:1300">Your Chapu has something planned for you. And no, you don't get to know everything just yet. 🤭</p>
+      <div class="btn-wrap rise" style="--d:1600">
+        <button class="btn" type="button" id="btn1">Okay, I'm listening <span class="arr" aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCENE 2: THE REVEAL ================= -->
+  <section class="scene" id="scene2" aria-labelledby="h2" aria-hidden="true" inert>
+    <div class="inner split">
+      <div class="art-col rise" style="--d:0">
+        <div class="frame">
+          <svg viewBox="0 0 360 300" role="img" aria-label="A winding road through soft hills toward a setting sun. A signpost points away from work and toward Chapu. A little gift waits by the road while snacks float in the sky.">
+            <defs>
+              <linearGradient id="g2sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFD8F0"/><stop offset=".55" stop-color="#FDEBC8"/><stop offset="1" stop-color="#FFD49A"/></linearGradient>
+              <radialGradient id="g2sun"><stop offset="0" stop-color="#FFE9A3" stop-opacity=".95"/><stop offset="1" stop-color="#FFE9A3" stop-opacity="0"/></radialGradient>
+            </defs>
+            <rect width="360" height="300" fill="url(#g2sky)"/>
+            <circle cx="245" cy="170" r="74" fill="url(#g2sun)"/>
+            <circle cx="245" cy="170" r="32" fill="#FFE28A" class="art-stroke"/>
+            <use href="#cloud" x="16" y="22" width="92" height="46" fill="#fff" stroke="#3B2416" stroke-width="2.4"/>
+            <use href="#cloud" x="232" y="30" width="66" height="33" fill="#fff" stroke="#3B2416" stroke-width="2.4"/>
+            <path d="M108 120q5-6 10 0q5-6 10 0M138 108q4-5 8 0q4-5 8 0" fill="none" class="art-stroke" stroke-width="2"/>
+            <!-- hills -->
+            <path d="M-10 200Q80 150 170 182T370 170V310H-10Z" fill="#C9B8EC" class="art-stroke"/>
+            <path d="M-10 228Q110 186 220 214T370 206V310H-10Z" fill="#A9CBEA" class="art-stroke"/>
+            <path d="M-10 258Q100 232 200 254T370 246V310H-10Z" fill="#F7E7C4" class="art-stroke"/>
+            <!-- winding road -->
+            <path d="M236 248C226 226 160 230 178 196" fill="none" stroke="#3B2416" stroke-width="18" stroke-linecap="round"/>
+            <path d="M118 316C124 282 250 280 236 248" fill="none" stroke="#3B2416" stroke-width="32" stroke-linecap="round"/>
+            <path d="M236 248C226 226 160 230 178 196" fill="none" stroke="#FFF3D6" stroke-width="13" stroke-linecap="round"/>
+            <path d="M118 316C124 282 250 280 236 248" fill="none" stroke="#FFF3D6" stroke-width="26" stroke-linecap="round"/>
+            <path d="M118 316C124 282 250 280 236 248" fill="none" stroke="#E9B872" stroke-width="2.5" stroke-dasharray="8 10" stroke-linecap="round"/>
+            <path d="M236 248C226 226 160 230 178 196" fill="none" stroke="#E9B872" stroke-width="1.8" stroke-dasharray="5 7" stroke-linecap="round"/>
+            <!-- signpost -->
+            <rect x="58" y="188" width="7" height="76" rx="2" fill="#C89B6D" class="art-stroke"/>
+            <path d="M28 194H92V214H28L18 204Z" fill="#fff" class="art-stroke"/>
+            <text x="58" y="209" text-anchor="middle" font-family="Caveat, cursive" font-weight="700" font-size="15" fill="#3B2416">work</text>
+            <path d="M42 205H74" stroke="#E2405B" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M30 220H98L108 230L98 240H30Z" fill="#FBE38E" class="art-stroke"/>
+            <text x="66" y="235" text-anchor="middle" font-family="Caveat, cursive" font-weight="700" font-size="15" fill="#3B2416">to Chapu</text>
+            <!-- gift -->
+            <g transform="translate(280 250)">
+              <rect x="0" y="10" width="34" height="26" rx="3" fill="#E2405B" class="art-stroke"/>
+              <rect x="-3" y="4" width="40" height="9" rx="3" fill="#F7A6B8" class="art-stroke"/>
+              <rect x="14" y="4" width="6" height="32" fill="#FBE38E" class="art-stroke" stroke-width="2"/>
+              <path d="M17 4C8-6 2 2 17 4C32 2 26-6 17 4" fill="#FBE38E" class="art-stroke" stroke-width="2"/>
+            </g>
+            <!-- floating snacks -->
+            <g class="bob"><g transform="translate(36 86)">
+              <path d="M0 22Q2 0 22 0Q42 0 44 22Q22 29 0 22Z" fill="#FFF7E6" class="art-stroke"/>
+              <path d="M22 1L17 11M22 1V12M22 1L27 11" fill="none" class="art-stroke" stroke-width="2"/>
+              <path d="M14-6q-3-5 0-9M22-8q-3-5 0-9M30-6q-3-5 0-9" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".9"/>
+            </g></g>
+            <g class="bob b2"><g transform="translate(150 40)">
+              <path d="M0 4H32L28 48H4Z" fill="#E6DBFA" class="art-stroke"/>
+              <path d="M18 4L26-14" class="art-stroke" stroke-width="4"/>
+              <path d="M18 4L26-14" stroke="#E2405B" stroke-width="2" stroke-linecap="round"/>
+              <path d="M-2 4H34" class="art-stroke"/>
+              <circle cx="10" cy="40" r="3" fill="#3B2416"/><circle cx="17" cy="42" r="3" fill="#3B2416"/><circle cx="23" cy="38" r="3" fill="#3B2416"/><circle cx="14" cy="34" r="3" fill="#3B2416"/>
+            </g></g>
+            <g class="bob b3"><g transform="translate(306 84)">
+              <path d="M0 18L12 50L24 18Z" fill="#E9B872" class="art-stroke"/>
+              <path d="M5 26L18 22M8 34L20 30" stroke="#3B2416" stroke-width="1.6" opacity=".6"/>
+              <path d="M-3 19Q-4 0 12-2Q28 0 27 19Z" fill="#F7A6B8" class="art-stroke"/>
+              <circle cx="12" cy="-6" r="4.5" fill="#E2405B" class="art-stroke" stroke-width="2"/>
+              <path d="M12-10Q14-16 18-17" fill="none" class="art-stroke" stroke-width="1.8"/>
+            </g></g>
+          </svg>
+        </div>
+      </div>
+      <span class="tag rise" style="--d:150"><span class="dot"></span>Official notice · out of office</span>
+      <h2 class="display rise" id="h2" tabindex="-1" style="--d:250">It's your day off, baby.</h2>
+      <p class="lede rise" style="--d:450">Your only plan today is to spend some time with me. The rest? We'll figure it out together.</p>
+      <div class="btn-wrap rise" style="--d:650">
+        <button class="btn" type="button" id="btn2">Wait, there's more? <span class="arr" aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCENE 3: THE DATE INVITATION ================= -->
+  <section class="scene" id="scene3" aria-labelledby="h3" aria-hidden="true" inert>
+    <div class="inner split">
+      <div class="art-col rise" style="--d:0">
+        <div class="frame" style="transform:rotate(1.2deg)">
+          <svg viewBox="0 0 360 320" role="img" aria-label="An evening path winding past glowing streetlights toward a red balloon with a question mark: the destination is a surprise. Pizza, noodles and a donut float among the stars.">
+            <defs>
+              <linearGradient id="g3sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6F68B5"/><stop offset=".45" stop-color="#B4A6E0"/><stop offset=".78" stop-color="#F6BFB6"/><stop offset="1" stop-color="#FFE0A6"/></linearGradient>
+              <radialGradient id="g3glow"><stop offset="0" stop-color="#FFF1BF" stop-opacity="1"/><stop offset=".35" stop-color="#FFE28A" stop-opacity=".55"/><stop offset="1" stop-color="#FFE28A" stop-opacity="0"/></radialGradient>
+              <mask id="m3moon"><rect width="360" height="320" fill="#fff"/><circle cx="300" cy="48" r="16" fill="#000"/></mask>
+            </defs>
+            <rect width="360" height="320" fill="url(#g3sky)"/>
+            <circle cx="290" cy="56" r="18" fill="#FFF1C2" mask="url(#m3moon)"/>
+            <use href="#spark" x="30" y="26" width="14" height="14" fill="#FFF7E6" class="tw"/>
+            <use href="#spark" x="110" y="18" width="10" height="10" fill="#FFF7E6" class="tw t2"/>
+            <use href="#spark" x="226" y="22" width="12" height="12" fill="#FFF7E6" class="tw t3"/>
+            <use href="#spark" x="330" y="104" width="10" height="10" fill="#FFF7E6" class="tw"/>
+            <use href="#spark" x="96" y="112" width="9" height="9" fill="#FFF7E6" class="tw t3"/>
+            <!-- hills -->
+            <path d="M-10 196Q90 160 180 186T370 176V330H-10Z" fill="#8C84C6" class="art-stroke"/>
+            <path d="M-10 236Q120 200 240 228T370 220V330H-10Z" fill="#6E68AE" class="art-stroke"/>
+            <path d="M-10 276Q110 252 220 272T370 266V330H-10Z" fill="#57528F" class="art-stroke"/>
+            <!-- path -->
+            <g fill="none" stroke-linecap="round">
+              <path d="M172 218C182 204 214 206 200 190" stroke="#3B2416" stroke-width="10"/>
+              <path d="M262 262C250 236 150 246 172 218" stroke="#3B2416" stroke-width="19"/>
+              <path d="M70 332C80 290 280 296 262 262" stroke="#3B2416" stroke-width="32"/>
+              <path d="M172 218C182 204 214 206 200 190" stroke="#FCE9C0" stroke-width="5.5"/>
+              <path d="M262 262C250 236 150 246 172 218" stroke="#FCE9C0" stroke-width="14"/>
+              <path d="M70 332C80 290 280 296 262 262" stroke="#FCE9C0" stroke-width="26"/>
+            </g>
+            <!-- streetlights -->
+            <g transform="translate(46 300)"><circle cx="0" cy="-42" r="26" fill="url(#g3glow)" class="glow"/><path d="M0 0V-38" class="art-stroke" stroke-width="3"/><rect x="-6" y="-50" width="12" height="9" rx="3" fill="#3B2416"/><circle cx="0" cy="-40" r="4" fill="#FFE28A"/></g>
+            <g transform="translate(306 270) scale(.82)"><circle cx="0" cy="-42" r="26" fill="url(#g3glow)" class="glow g2"/><path d="M0 0V-38" class="art-stroke" stroke-width="3"/><rect x="-6" y="-50" width="12" height="9" rx="3" fill="#3B2416"/><circle cx="0" cy="-40" r="4" fill="#FFE28A"/></g>
+            <g transform="translate(140 242) scale(.6)"><circle cx="0" cy="-42" r="26" fill="url(#g3glow)" class="glow g3"/><path d="M0 0V-38" class="art-stroke" stroke-width="3"/><rect x="-6" y="-50" width="12" height="9" rx="3" fill="#3B2416"/><circle cx="0" cy="-40" r="4" fill="#FFE28A"/></g>
+            <g transform="translate(228 208) scale(.42)"><circle cx="0" cy="-42" r="26" fill="url(#g3glow)" class="glow g4"/><path d="M0 0V-38" class="art-stroke" stroke-width="3"/><rect x="-6" y="-50" width="12" height="9" rx="3" fill="#3B2416"/><circle cx="0" cy="-40" r="4" fill="#FFE28A"/></g>
+            <!-- mystery destination balloon -->
+            <g class="bob"><g transform="translate(200 140)">
+              <path d="M0 20Q5 32 0 46" fill="none" class="art-stroke" stroke-width="2"/>
+              <ellipse cx="0" cy="0" rx="15" ry="18" fill="#E2405B" class="art-stroke"/>
+              <path d="M-4 18L0 22L4 18Z" fill="#E2405B" class="art-stroke" stroke-width="2"/>
+              <text x="0" y="7" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-weight="900" font-size="20" fill="#FFF7E6">?</text>
+            </g></g>
+            <text x="26" y="158" font-family="Caveat, cursive" font-weight="700" font-size="17" fill="#3B2416" transform="rotate(-5 26 158)">destination: surprise! →</text>
+            <!-- food doodles -->
+            <g class="bob b2"><g transform="translate(30 60) rotate(-14)">
+              <path d="M0 2L42 8L14 46Z" fill="#FBE38E" class="art-stroke"/>
+              <path d="M-2 1Q20-4 44 7" fill="none" stroke="#3B2416" stroke-width="8" stroke-linecap="round"/>
+              <path d="M-2 1Q20-4 44 7" fill="none" stroke="#E9B872" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="15" cy="13" r="4" fill="#E2405B" class="art-stroke" stroke-width="1.6"/><circle cx="25" cy="16" r="3.5" fill="#E2405B" class="art-stroke" stroke-width="1.6"/><circle cx="16" cy="28" r="3.5" fill="#E2405B" class="art-stroke" stroke-width="1.6"/>
+            </g></g>
+            <g class="bob b3"><g transform="translate(120 54)">
+              <path d="M6 2q4-10 8 0q4-10 8 0q4-10 8 0q4-10 8 0" fill="none" class="art-stroke" stroke-width="2.2"/>
+              <path d="M30-2L58-24M34 0L62-20" class="art-stroke" stroke-width="2.4"/>
+              <path d="M0 2H48Q46 28 24 30Q2 28 0 2Z" fill="#A9CBEA" class="art-stroke"/>
+              <path d="M10 14H38" stroke="#FFF7E6" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 6"/>
+            </g></g>
+            <g class="bob"><g transform="translate(262 96)">
+              <circle r="18" fill="#E9B872" class="art-stroke"/>
+              <path d="M-14-6Q-16-16-4-16Q6-18 12-12Q18-6 14 4Q8 14-2 12Q-12 12-14 2Z" fill="#F7A6B8"/>
+              <circle r="5" fill="#C7B6E8" class="art-stroke" stroke-width="2"/>
+              <path d="M-8-9l3 2M6-10l2 3M9 2l3 1M-10 3l2-3M-1 9l3 1" stroke="#3B2416" stroke-width="2" stroke-linecap="round"/>
+            </g></g>
+            <circle cx="70" cy="214" r="2.5" fill="#FFE9A3" class="firefly"/>
+            <circle cx="300" cy="200" r="2.5" fill="#FFE9A3" class="firefly f2"/>
+            <circle cx="120" cy="180" r="2" fill="#FFE9A3" class="firefly f3"/>
+          </svg>
+        </div>
+        <p class="note">where? we'll decide on the spot. that's half the fun.</p>
+      </div>
+
+      <h2 class="display stack" id="h3" tabindex="-1" aria-label="One date. Two idiots. Zero boring plans.">
+        <span class="hl" style="--c:var(--butter);--d:500">ONE DATE.</span>
+        <span class="hl" style="--c:var(--powder);--d:850">TWO IDIOTS.</span>
+        <span class="hl" style="--c:var(--cherry-soft);--d:1200">ZERO BORING PLANS.</span>
+      </h2>
+      <p class="lede rise" style="--d:300">An evening with your Chapu. Good food, random plans, a little bit of chaos, lots of laughing, and all my favourite time spent with you.</p>
+      <ul class="promises">
+        <li class="promise rise" style="--d:700" tabindex="0">
+          <span class="ico" style="background:var(--butter)" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 14H28Q27 26 16 27Q5 26 4 14Z" fill="#FFF7E6" class="art-stroke" stroke-width="2"/><path d="M10 10q2-4 0-7M16 10q2-4 0-7M22 10q2-4 0-7" fill="none" class="art-stroke" stroke-width="2"/></svg></span>
+          <span><span class="num">PROMISE 01</span>Something yummy, obviously.</span>
+        </li>
+        <li class="promise rise" style="--d:850" tabindex="0">
+          <span class="ico" style="background:var(--powder)" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 29C9 20 6 16 6 12A10 10 0 0 1 26 12C26 16 23 20 16 29Z" fill="#E2405B" class="art-stroke" stroke-width="2"/><text x="16" y="17" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-weight="900" font-size="12" fill="#FFF7E6">?</text></svg></span>
+          <span><span class="num">PROMISE 02</span>Somewhere we'll decide together.</span>
+        </li>
+        <li class="promise rise" style="--d:1000" tabindex="0">
+          <span class="ico" style="background:var(--lavender)" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 12H15V24Q15 27 12 27H7Q4 27 4 24Z" fill="#FFF7E6" class="art-stroke" stroke-width="2"/><path d="M17 12H28V24Q28 27 25 27H20Q17 27 17 24Z" fill="#FBE38E" class="art-stroke" stroke-width="2"/><use href="#heart" x="11" y="2" width="10" height="9" fill="#E2405B"/></svg></span>
+          <span><span class="num">PROMISE 03</span>Quality time with your favourite person.<small>(That's me, in case you forgot.)</small></span>
+        </li>
+      </ul>
+      <div class="btn-wrap rise" style="--d:1200">
+        <button class="btn btn--cherry" type="button" id="btn3">Okay, Chapu. I'm in <span aria-hidden="true">♡</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCENE 4: A PERSONAL MOMENT ================= -->
+  <section class="scene" id="scene4" aria-labelledby="h4" aria-hidden="true" inert>
+    <div class="inner split">
+      <div class="art-col rise" style="--d:0">
+        <div class="frame" style="transform:rotate(-.8deg)">
+          <svg viewBox="0 0 360 280" role="img" aria-label="A cosy room at night: a sofa with pillows and a blanket, a show glowing on the TV, popcorn on the floor, two pairs of slippers on the rug, and sleepy z's floating up.">
+            <defs>
+              <radialGradient id="g4lamp" cx=".08" cy=".3" r=".7"><stop offset="0" stop-color="#FFE6A8" stop-opacity=".95"/><stop offset="1" stop-color="#FFE6A8" stop-opacity="0"/></radialGradient>
+              <radialGradient id="g4tv" cx=".85" cy=".55" r=".55"><stop offset="0" stop-color="#FF7A90" stop-opacity=".6"/><stop offset="1" stop-color="#FF7A90" stop-opacity="0"/></radialGradient>
+            </defs>
+            <rect width="360" height="212" fill="#F4E2D2"/>
+            <rect width="360" height="280" fill="url(#g4lamp)"/>
+            <!-- window -->
+            <g transform="translate(112 22)">
+              <rect width="124" height="72" rx="8" fill="#4E4A8E" class="art-stroke"/>
+              <circle cx="96" cy="22" r="10" fill="#FFF1C2"/>
+              <use href="#spark" x="18" y="12" width="10" height="10" fill="#FFF7E6" class="tw"/>
+              <use href="#spark" x="40" y="40" width="8" height="8" fill="#FFF7E6" class="tw t2"/>
+              <use href="#spark" x="70" y="48" width="7" height="7" fill="#FFF7E6" class="tw t3"/>
+              <path d="M62 0V72M0 36H124" class="art-stroke"/>
+            </g>
+            <!-- floor -->
+            <rect y="210" width="360" height="70" fill="#E6C9A0"/>
+            <path d="M0 211H360" class="art-stroke"/>
+            <ellipse cx="160" cy="246" rx="124" ry="22" fill="#C9B8EC" class="art-stroke"/>
+            <!-- lamp -->
+            <path d="M26 92V210" class="art-stroke" stroke-width="3"/>
+            <ellipse cx="26" cy="211" rx="14" ry="4" fill="#3B2416"/>
+            <path d="M8 92H44L37 64H15Z" fill="#FBE38E" class="art-stroke"/>
+            <!-- sofa -->
+            <rect x="62" y="112" width="176" height="72" rx="24" fill="#A9CBEA" class="art-stroke"/>
+            <rect x="54" y="168" width="192" height="36" rx="12" fill="#BCD7EF" class="art-stroke"/>
+            <path d="M150 172V202" class="art-stroke" stroke-width="2"/>
+            <rect x="40" y="146" width="36" height="62" rx="16" fill="#A9CBEA" class="art-stroke"/>
+            <rect x="224" y="146" width="36" height="62" rx="16" fill="#A9CBEA" class="art-stroke"/>
+            <rect x="62" y="206" width="7" height="10" rx="2" fill="#3B2416"/><rect x="231" y="206" width="7" height="10" rx="2" fill="#3B2416"/>
+            <rect x="82" y="128" width="46" height="40" rx="12" fill="#FBE38E" class="art-stroke" transform="rotate(-10 105 148)"/>
+            <rect x="172" y="130" width="44" height="38" rx="12" fill="#C9B8EC" class="art-stroke" transform="rotate(9 194 149)"/>
+            <path d="M146 152Q190 140 236 158L244 214Q204 224 166 212Z" fill="#FFF7E6" class="art-stroke"/>
+            <path d="M152 166Q192 156 238 172M156 182Q196 172 240 188M160 198Q198 190 242 204" fill="none" stroke="#C9B8EC" stroke-width="4" stroke-linecap="round"/>
+            <!-- sleepy z's -->
+            <text x="118" y="106" font-family="Caveat, cursive" font-weight="700" font-size="20" fill="#3B2416" class="zz">z</text>
+            <text x="134" y="92" font-family="Caveat, cursive" font-weight="700" font-size="24" fill="#3B2416" class="zz z2">z</text>
+            <text x="152" y="76" font-family="Caveat, cursive" font-weight="700" font-size="28" fill="#3B2416" class="zz z3">z</text>
+            <!-- TV -->
+            <rect width="360" height="280" fill="url(#g4tv)" class="tvglow"/>
+            <rect x="276" y="166" width="74" height="44" rx="5" fill="#D9B48A" class="art-stroke"/>
+            <path d="M313 166V210" class="art-stroke" stroke-width="2"/>
+            <rect x="280" y="108" width="66" height="50" rx="7" fill="#3B2416"/>
+            <rect x="285" y="113" width="56" height="40" rx="4" fill="#E2405B"/>
+            <path d="M308 124L322 133L308 142Z" fill="#FFF7E6"/>
+            <path d="M300 158L296 166M326 158L330 166" class="art-stroke"/>
+            <!-- popcorn -->
+            <g transform="translate(92 216)">
+              <circle cx="5" cy="0" r="6" fill="#FFF7E6" class="art-stroke" stroke-width="2"/><circle cx="14" cy="-4" r="6" fill="#FFF7E6" class="art-stroke" stroke-width="2"/><circle cx="22" cy="1" r="6" fill="#FFF7E6" class="art-stroke" stroke-width="2"/>
+              <path d="M0 2H26L22 32H4Z" fill="#FFF7E6" class="art-stroke"/>
+              <path d="M8 4L9 30M16 4L15 30" stroke="#E2405B" stroke-width="4"/>
+              <path d="M0 2H26L22 32H4Z" fill="none" class="art-stroke"/>
+            </g>
+            <!-- two pairs of slippers -->
+            <g class="art-stroke" stroke-width="2">
+              <ellipse cx="160" cy="246" rx="11" ry="5.5" fill="#FBE38E" transform="rotate(-12 160 246)"/>
+              <ellipse cx="176" cy="252" rx="11" ry="5.5" fill="#FBE38E" transform="rotate(-6 176 252)"/>
+              <ellipse cx="200" cy="244" rx="11" ry="5.5" fill="#A9CBEA" transform="rotate(10 200 244)"/>
+              <ellipse cx="214" cy="252" rx="11" ry="5.5" fill="#A9CBEA" transform="rotate(16 214 252)"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <p class="eyebrow rise" style="--d:150">okay, the soft bit.</p>
+      <h2 class="display rise" id="h4" tabindex="-1" style="--d:300">My favourite plans are the ones with you.</h2>
+      <div class="card rise" style="--d:550">
+        <!-- EASY EDIT: the personal message -->
+        <p>Honestly, baby, we don't even need the perfect plan. Some of my favourite moments are just us chilling together: stealing cuddles, watching something on Netflix until one of us falls asleep, finding something yummy to eat, or laughing at absolutely nothing.</p>
+        <p>I just love doing life with you, in our own little way.</p>
+      </div>
+      <div class="chips rise" style="--d:800" aria-label="Our favourite things">
+        <span class="chip" style="--c:#FFF7E6">netflix</span>
+        <span class="chip" style="--c:var(--butter)">cuddles</span>
+        <span class="chip" style="--c:var(--powder)">food</span>
+        <span class="chip" style="--c:var(--lavender)">naps</span>
+        <span class="chip" style="--c:var(--cherry-soft)">nonsense</span>
+      </div>
+      <div class="btn-wrap rise" style="--d:1000">
+        <button class="btn" type="button" id="btn4">Okay but… where's my cake? <span class="arr" aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCENE 5: THE BIRTHDAY ENDING ================= -->
+  <section class="scene night" id="scene5" aria-labelledby="h5" aria-hidden="true" inert>
+    <div class="inner" id="finale">
+      <p class="eyebrow rise" style="--d:100">make a wish, birthday boy</p>
+      <h2 class="display letters" id="h5" tabindex="-1">HAPPY BIRTHDAY, MY BABY ♡</h2>
+
+      <button class="cake-btn rise" style="--d:900" type="button" id="cake" aria-label="Birthday cake with one candle. Tap to blow out the candle.">
+        <svg viewBox="0 0 240 240" aria-hidden="true">
+          <defs><radialGradient id="g5glow"><stop offset="0" stop-color="#FFE9A3" stop-opacity=".9"/><stop offset="1" stop-color="#FFE9A3" stop-opacity="0"/></radialGradient></defs>
+          <g class="cake-glow"><circle cx="120" cy="40" r="58" fill="url(#g5glow)"/></g>
+          <ellipse cx="120" cy="214" rx="104" ry="16" fill="#FFF7E6" class="art-stroke"/>
+          <rect x="36" y="140" width="168" height="70" rx="12" fill="#FBE38E" class="art-stroke"/>
+          <path d="M36 152Q36 140 48 140H192Q204 140 204 152V160Q198 170 192 160Q186 176 178 160Q170 166 160 160Q152 180 142 160Q134 168 124 160Q116 174 106 160Q98 166 88 160Q80 178 70 160Q62 168 54 160Q46 172 36 160Z" fill="#FFF7E6" class="art-stroke"/>
+          <text x="120" y="200" text-anchor="middle" font-family="Caveat, cursive" font-weight="700" font-size="26" fill="#E2405B">Motuu</text>
+          <rect x="66" y="92" width="108" height="52" rx="12" fill="#F7A6B8" class="art-stroke"/>
+          <path d="M66 104Q66 92 78 92H162Q174 92 174 104V110Q168 120 160 110Q152 124 142 110Q134 116 124 110Q116 126 106 110Q98 118 88 110Q80 122 66 110Z" fill="#FFF7E6" class="art-stroke"/>
+          <path d="M82 128l5-2M100 134l4 3M140 130l5-1M156 126l3 3M118 138l5 0" stroke="#3B2416" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M92 122l4 2M130 124l3-3" stroke="#A9CBEA" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="84" cy="90" r="6.5" fill="#E2405B" class="art-stroke" stroke-width="2"/><path d="M84 84Q86 76 92 74" fill="none" class="art-stroke" stroke-width="1.8"/>
+          <circle cx="156" cy="90" r="6.5" fill="#E2405B" class="art-stroke" stroke-width="2"/><path d="M156 84Q154 76 148 74" fill="none" class="art-stroke" stroke-width="1.8"/>
+          <rect x="114" y="52" width="12" height="42" rx="3" fill="#A9CBEA" class="art-stroke"/>
+          <path d="M115 64L125 60M115 76L125 72M115 88L125 84" stroke="#FFF7E6" stroke-width="3" stroke-linecap="round"/>
+          <path d="M120 52V45" class="art-stroke" stroke-width="2"/>
+          <g class="flame">
+            <path d="M120 14C129 27 131 36 120 45C109 36 111 27 120 14Z" fill="#FFC94D" class="art-stroke" stroke-width="2"/>
+            <path d="M120 26C124 32 125 37 120 41C115 37 116 32 120 26Z" fill="#FF8A5B"/>
+          </g>
+          <path class="smoke" d="M120 44C114 36 126 30 120 22C114 14 124 8 120 0" fill="none" stroke="#EDE4FF" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <p class="wish-hint rise" style="--d:1100">eyes closed. wish. now blow ↓</p>
+      <div class="btn-wrap blow-wrap rise" style="--d:1250">
+        <button class="btn" type="button" id="blow">Blow out the candle <span aria-hidden="true">✨</span></button>
+      </div>
+
+      <!-- EASY EDIT: the birthday letter (each <p> appears one after another) -->
+      <article class="letter-card" id="letter" aria-label="A birthday message from Chapu">
+        <p class="first">Happy birthday, Anmol.</p>
+        <p>I hope this year brings you so many reasons to smile, so many things to look forward to, and all the happiness you deserve.</p>
+        <p>And selfishly, I hope I get to be there for lots of it — for the adventures, the late-night conversations, the random food plans, the cuddles, the laughs, and all the ordinary little moments that somehow become my favourites.</p>
+        <p>Today, I just want to spoil you a little and remind you how special you are to me.</p>
+        <p>Now come here, birthday boy. Your Chapu has a date to take you on.</p>
+        <p class="love">I love you. ♡</p>
+        <span class="sig" id="sig">Your Chapu, always ♡</span>
+      </article>
+
+      <div class="btn-wrap replay-wrap" id="replayWrap">
+        <button class="btn btn--ghost" type="button" id="replay" tabindex="-1">Replay our little adventure <span aria-hidden="true">↻</span></button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="fx" id="fx" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<noscript><p style="position:fixed;bottom:0;left:0;right:0;padding:16px;background:#FBE38E;text-align:center;z-index:99;font-weight:800">Please open this in a browser with JavaScript turned on. Your Chapu made it interactive ♡</p></noscript>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const COLORS = ['#E2405B', '#FBE38E', '#A9CBEA', '#C9B8EC', '#F7A6B8', '#FFF7E6'];
+
+  const scenes = $$('.scene');
+  let current = 0;
+  let busy = false;
+  let timers = [];
+  const later = (fn, ms) => { const t = setTimeout(fn, ms); timers.push(t); return t; };
+
+  /* ---------- headline letters ---------- */
+  $$('.letters').forEach(h => {
+    const text = h.textContent.trim();
+    h.setAttribute('aria-label', text);
+    h.textContent = '';
+    let i = 0;
+    text.split(' ').forEach((word, wi, arr) => {
+      const w = document.createElement('span');
+      w.className = 'word';
+      w.setAttribute('aria-hidden', 'true');
+      [...word].forEach(c => {
+        const s = document.createElement('span');
+        s.className = 'ch';
+        s.style.setProperty('--i', i++);
+        s.textContent = c;
+        w.appendChild(s);
+      });
+      h.appendChild(w);
+      if (wi < arr.length - 1) h.appendChild(document.createTextNode(' '));
+    });
+  });
+
+  /* ---------- sky stars ---------- */
+  const starBox = $('#stars');
+  const starCount = window.innerWidth < 600 ? 55 : 90;
+  for (let i = 0; i < starCount; i++) {
+    const s = document.createElement('span');
+    const sparkle = i % 9 === 0;
+    s.className = 'star' + (sparkle ? ' sparkle' : '');
+    s.style.left = (Math.random() * 100) + '%';
+    s.style.top = (Math.random() * 72) + '%';
+    s.style.setProperty('--s', (sparkle ? 4 : 1.5 + Math.random() * 2.2) + 'px');
+    s.style.setProperty('--t', (2 + Math.random() * 3.5) + 's');
+    s.style.setProperty('--d', (-Math.random() * 4) + 's');
+    if (sparkle) s.innerHTML = '<svg viewBox="-10 -10 20 20"><use href="#spark" fill="#FFF7E6"/></svg>';
+    starBox.appendChild(s);
+  }
+
+  /* ---------- progress ---------- */
+  const dots = $$('.progress li');
+  const scooter = $('#scooter');
+  const progressText = $('#progressText');
+  const names = ['the message', 'the reveal', 'the plan', 'the soft bit', 'the birthday'];
+  function updateProgress() {
+    dots.forEach((d, i) => {
+      d.classList.toggle('done', i < current);
+      d.classList.toggle('now', i === current);
+    });
+    const dot = dots[current];
+    scooter.style.left = (dot.offsetLeft + dot.offsetWidth / 2) + 'px';
+    progressText.textContent = `Part ${current + 1} of 5: ${names[current]}`;
+  }
+
+  /* ---------- bursts + confetti ---------- */
+  const fx = $('#fx');
+  function burst(x, y, n = 18, spread = 120) {
+    if (reduced()) return;
+    for (let i = 0; i < n; i++) {
+      const el = document.createElement('span');
+      const kind = i % 3;
+      el.className = 'spark' + (kind === 1 ? ' dot' : '');
+      el.style.color = COLORS[i % COLORS.length];
+      if (kind === 0) el.innerHTML = '<svg viewBox="-10 -10 20 20"><use href="#spark" fill="currentColor" stroke="#3B2416" stroke-width="1.2"/></svg>';
+      if (kind === 2) el.innerHTML = '<svg viewBox="0 0 24 22"><use href="#heart" fill="currentColor" stroke="#3B2416" stroke-width="1.6"/></svg>';
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
+      fx.appendChild(el);
+      const ang = Math.random() * Math.PI * 2;
+      const dist = spread * (0.45 + Math.random() * 0.8);
+      const dx = Math.cos(ang) * dist, dy = Math.sin(ang) * dist - 30;
+      const rot = (Math.random() - 0.5) * 300;
+      const anim = el.animate([
+        { transform: 'translate(0,0) scale(.2) rotate(0deg)', opacity: 1 },
+        { transform: `translate(${dx}px,${dy}px) scale(1) rotate(${rot}deg)`, opacity: 1, offset: 0.65 },
+        { transform: `translate(${dx}px,${dy + 34}px) scale(.5) rotate(${rot}deg)`, opacity: 0 }
+      ], { duration: 900 + Math.random() * 500, easing: 'cubic-bezier(.2,.7,.3,1)' });
+      anim.onfinish = () => el.remove();
+    }
+  }
+  function burstFrom(el, n, spread) {
+    const r = el.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, n, spread);
+  }
+  function confettiRain(count = 60) {
+    if (reduced()) return;
+    const w = window.innerWidth, h = window.innerHeight;
+    for (let i = 0; i < count; i++) {
+      const c = document.createElement('span');
+      c.className = 'confetti';
+      c.style.left = (Math.random() * w) + 'px';
+      c.style.background = COLORS[i % (COLORS.length - 1)];
+      if (i % 4 === 0) { c.style.borderRadius = '50%'; c.style.width = c.style.height = '9px'; }
+      fx.appendChild(c);
+      const drift = (Math.random() - 0.5) * 160;
+      const a = c.animate([
+        { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+        { transform: `translate(${drift}px, ${h + 40}px) rotate(${(Math.random() - .5) * 900}deg)`, opacity: 0.9 }
+      ], { duration: 2600 + Math.random() * 2200, delay: Math.random() * 700, easing: 'cubic-bezier(.25,.4,.5,1)', fill: 'backwards' });
+      a.onfinish = () => c.remove();
+    }
+  }
+
+  /* ---------- scene navigation ---------- */
+  function go(next) {
+    if (busy || next === current || next < 0 || next >= scenes.length) return;
+    busy = true;
+    const from = scenes[current], to = scenes[next];
+    const quick = reduced();
+    from.classList.remove('is-active');
+    from.classList.add('is-leaving');
+    from.setAttribute('aria-hidden', 'true');
+    from.inert = true;
+    setTimeout(() => from.classList.remove('is-leaving'), quick ? 0 : 560);
+
+    setTimeout(() => {
+      current = next;
+      document.body.dataset.scene = String(next + 1);
+      if (next === 4) resetFinale();
+      to.scrollTop = 0;
+      to.removeAttribute('aria-hidden');
+      to.inert = false;
+      to.classList.add('is-active');
+      updateProgress();
+      const h = $('h1, h2', to);
+      if (h) h.focus({ preventScroll: true });
+      setTimeout(() => { busy = false; }, quick ? 0 : 500);
+    }, quick ? 0 : 380);
+  }
+
+  /* Scene 1 */
+  const envelope = $('#envelope');
+  envelope.addEventListener('click', () => {
+    envelope.classList.remove('wiggle');
+    void envelope.offsetWidth;
+    envelope.classList.add('wiggle');
+    burstFrom(envelope, 10, 80);
+  });
+  $('#btn1').addEventListener('click', e => {
+    if (busy) return;
+    envelope.classList.add('open');
+    burstFrom(e.currentTarget, 16, 110);
+    setTimeout(() => burstFrom(envelope, 14, 120), reduced() ? 0 : 500);
+    setTimeout(() => go(1), reduced() ? 0 : 1250);
+  });
+
+  /* Scene 2 */
+  $('#btn2').addEventListener('click', e => { burstFrom(e.currentTarget, 16, 110); go(2); });
+
+  /* Scene 3 */
+  $$('.promise').forEach(p => {
+    const wig = () => { p.classList.remove('wig'); void p.offsetWidth; p.classList.add('wig'); burstFrom(p, 6, 60); };
+    p.addEventListener('click', wig);
+    p.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); wig(); } });
+  });
+  $('#btn3').addEventListener('click', e => {
+    if (busy) return;
+    burstFrom(e.currentTarget, 26, 160);
+    setTimeout(() => go(3), reduced() ? 0 : 450);
+  });
+
+  /* Scene 4 */
+  $('#btn4').addEventListener('click', e => { burstFrom(e.currentTarget, 16, 110); go(4); });
+
+  /* Scene 5 */
+  const finale = $('#scene5');
+  const letterLines = $$('#letter p');
+  const sig = $('#sig');
+  const replayWrap = $('#replayWrap');
+  const replayBtn = $('#replay');
+  let blown = false;
+
+  function resetFinale() {
+    timers.forEach(clearTimeout); timers = [];
+    blown = false;
+    finale.classList.remove('blown');
+    letterLines.forEach(p => p.classList.remove('show'));
+    sig.classList.remove('show');
+    replayWrap.classList.remove('show');
+    replayBtn.tabIndex = -1;
+  }
+  function blow() {
+    if (blown || busy) return;
+    blown = true;
+    const cake = $('#cake');
+    const r = cake.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height * 0.14, 34, 190);
+    finale.classList.add('blown');
+    confettiRain();
+    const quick = reduced();
+    const step = quick ? 0 : 1300;
+    const start = quick ? 0 : 900;
+    letterLines.forEach((p, i) => later(() => {
+      p.classList.add('show');
+      if (!quick) p.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }, start + i * step));
+    const end = start + letterLines.length * step;
+    later(() => { sig.classList.add('show'); }, end);
+    later(() => {
+      replayWrap.classList.add('show');
+      replayBtn.tabIndex = 0;
+      if (!quick) replayWrap.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      if (!quick) burstFrom(sig, 14, 90);
+    }, end + (quick ? 0 : 1500));
+  }
+  $('#cake').addEventListener('click', blow);
+  $('#blow').addEventListener('click', blow);
+
+  replayBtn.addEventListener('click', () => {
+    if (busy) return;
+    timers.forEach(clearTimeout); timers = [];
+    envelope.classList.remove('open', 'wiggle');
+    go(0);
+  });
+
+  /* keyboard: right arrow / page down = next where there's an obvious next */
+  document.addEventListener('keydown', e => {
+    if (e.target.closest && e.target.closest('button, [tabindex="0"]') && (e.key === 'Enter' || e.key === ' ')) return;
+    if (e.key === 'ArrowRight') {
+      const btn = { 0: '#btn1', 1: '#btn2', 2: '#btn3', 3: '#btn4' }[current];
+      if (btn) $(btn).click();
+    }
+  });
+
+  /* ---------- soft music-box music (made in the browser, starts muted) ---------- */
+  const Music = (() => {
+    let ctx, master, timer, step = 0, nextTime = 0, on = false;
+    const STEP = 0.27;
+    const mel = [76,0,79,0,81,0,79,76, 74,0,76,0,79,0,0,0, 72,0,74,76,79,0,76,0, 74,0,72,0,74,0,0,0,
+                 76,0,79,0,84,0,81,79, 81,0,79,76,74,0,0,0, 72,0,74,0,76,79,76,74, 72,0,0,0,0,0,0,0];
+    const roots = [48,45,41,43,48,45,41,48], fifths = [55,52,48,50,55,52,50,55];
+    const bass = [];
+    roots.forEach((r, i) => bass.push(r,0,0,0,fifths[i],0,0,0));
+    const hz = m => 440 * Math.pow(2, (m - 69) / 12);
+    function note(m, t, vol, dur) {
+      const o = ctx.createOscillator(), o2 = ctx.createOscillator(), g = ctx.createGain(), g2 = ctx.createGain();
+      o.type = 'sine'; o2.type = 'triangle';
+      o.frequency.value = hz(m); o2.frequency.value = hz(m) * 2;
+      g2.gain.value = 0.12;
+      o.connect(g); o2.connect(g2); g2.connect(g); g.connect(master);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol, t + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.start(t); o2.start(t); o.stop(t + dur + 0.05); o2.stop(t + dur + 0.05);
+    }
+    function tick() {
+      while (nextTime < ctx.currentTime + 0.4) {
+        const m = mel[step % mel.length], b = bass[step % bass.length];
+        if (m) note(m, nextTime, 0.2, 1.5);
+        if (b) note(b, nextTime, 0.1, 2.4);
+        nextTime += STEP; step++;
+      }
+    }
+    function toggle() {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return false;
+      if (!ctx) {
+        ctx = new AC();
+        master = ctx.createGain(); master.gain.value = 0;
+        const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2600;
+        master.connect(lp); lp.connect(ctx.destination);
+      }
+      on = !on;
+      if (on) {
+        ctx.resume();
+        master.gain.cancelScheduledValues(ctx.currentTime);
+        master.gain.setTargetAtTime(0.55, ctx.currentTime, 0.4);
+        nextTime = ctx.currentTime + 0.1;
+        clearInterval(timer); timer = setInterval(tick, 100);
+      } else {
+        master.gain.setTargetAtTime(0, ctx.currentTime, 0.2);
+        clearInterval(timer);
+      }
+      return on;
+    }
+    document.addEventListener('visibilitychange', () => {
+      if (!ctx || !on) return;
+      if (document.hidden) ctx.suspend(); else { ctx.resume(); nextTime = ctx.currentTime + 0.1; }
+    });
+    return { toggle };
+  })();
+
+  const soundBtn = $('#sound');
+  soundBtn.addEventListener('click', () => {
+    const on = Music.toggle();
+    soundBtn.setAttribute('aria-pressed', String(on));
+    soundBtn.setAttribute('aria-label', on ? 'Mute background music' : 'Play soft background music');
+  });
+
+  /* init */
+  scenes.forEach((s, i) => { if (i !== 0) s.inert = true; });
+  updateProgress();
+  window.addEventListener('resize', updateProgress);
+})();
+</script>
+</body>
+</html>
